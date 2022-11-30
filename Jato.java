@@ -5,44 +5,34 @@ public class Jato extends Aeromodelo {
     private String cor;
     private int velocidade;
     public static ArrayList<Jato> jatos = new ArrayList<Jato>();
-    private Generic<String, Integer> prefixo;
 
     public Jato() {
 
 
     }
 
-    public Jato(int id, String marca, String modelo, String cor, int velocidade, Generic<String, Integer> prefixo) {
+    public Jato(int id, String marca, String modelo, String cor, int velocidade) {
 
         super(id, marca, modelo);
         try{
             if(jatos.isEmpty()) {   
-                     
-                this.prefixo = prefixo;
+                    
                 this.cor = cor;
                 this.velocidade = velocidade;
-        
                 jatos.add(this);
-            }else if(!jatos.isEmpty())
-                for(Jato jato : jatos){
-                    if(jato.getPrefixo().equals(prefixo)){
-                        throw new Exception("Prefixo já cadastrado!");
-                    }else{
-                        this.prefixo = prefixo;
-                        this.cor = cor;
-                        this.velocidade = velocidade;
-                
-                        jatos.add(this);
-                    }
+
             }else{
-                throw new Exception("Jato já cadastrado");
+                    throw new Exception("Jato já cadastrado");
             }
         }catch(Exception e){
-            System.out.println(e.getMessage());
-        }   
+             System.out.println(e.getMessage());
+            
         
 
+        }
     }
+
+
 
     public Jato(String marca, String modelo, String cor, int velocidade) {
         
@@ -51,13 +41,6 @@ public class Jato extends Aeromodelo {
     }
 
 
-    public Generic<String, Integer> getPrefixo() {
-        return prefixo;
-    }
-
-    public void setPrefixo(Generic<String, Integer> prefixo) {
-        this.prefixo = prefixo;
-    }
 
     public String getCor() {
         return cor;
@@ -75,5 +58,31 @@ public class Jato extends Aeromodelo {
         this.velocidade = velocidade;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "| Id: " + this.id + " | Marca: " + this.marca + " | Modelo: " + this.modelo + " | Cor: " + this.cor + " | Velocidade: " + this.velocidade;
+    }
+
+    public static Jato getJatoById(int id) {
+        for (Jato jato : Jato.jatos) {
+            if (jato.id == id) {
+                return jato;
+            }
+        }
+
+        return null;
+    }
+
+
+    public static Jato deleteJatoById(int id) {
+        for (Jato jato : Jato.jatos) {
+            if (jato.id == id) {
+                Jato.jatos.remove(jato);
+                return jato;
+            }
+        }
+
+        return null;
+    }
 
 }

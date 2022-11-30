@@ -26,4 +26,6 @@ public class Generic<S, N extends Number>{
     }
 
 
+    
+
 }

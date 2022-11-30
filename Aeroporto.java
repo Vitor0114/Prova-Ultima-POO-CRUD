@@ -297,5 +297,6 @@ public class Aeroporto {
     }
 
     private static void CadastrarHangar() {
+
     }
 }

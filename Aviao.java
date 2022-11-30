@@ -5,17 +5,19 @@ public class Aviao extends Aeromodelo {
     private Generic<String, Integer> prefixo;
     private String capacidade;
     private int idCompanhia;
+    private Companhia companhia;
+
     public static ArrayList<Aviao> avioes = new ArrayList<Aviao>();
 
-    public Aviao (int id, String nome, Generic<String, Integer> prefixo, String marca, String modelo, String capacidade, int idCompanhia) {
+    public Aviao (int id, String nome, Generic<String, Integer> prefixo, String marca, String modelo, String capacidade, Companhia companhia, int idCompanhia) {
 
         super(id, marca, modelo);
         try{
             if(avioes.isEmpty()) {   
-                     
+                this.idCompanhia = idCompanhia;
                 this.prefixo = prefixo;
                 this.capacidade = capacidade;
-                this.idCompanhia = idCompanhia;
+                this.companhia = companhia;
         
                 avioes.add(this);
             }else if(!avioes.isEmpty())
@@ -25,6 +27,7 @@ public class Aviao extends Aeromodelo {
                     }else{
                         this.prefixo = prefixo;
                         this.capacidade = capacidade;
+                        this.companhia = companhia;
                         this.idCompanhia = idCompanhia;
                 
                         avioes.add(this);
@@ -47,6 +50,14 @@ public class Aviao extends Aeromodelo {
     }
 
     
+    public int getIdCompanhia() {
+        return idCompanhia;
+    }
+
+    public void setIdCompanhia(int idCompanhia) {
+        this.idCompanhia = idCompanhia;
+    }
+
 
     public String getCapacidade() {
         return capacidade;
@@ -56,12 +67,12 @@ public class Aviao extends Aeromodelo {
         this.capacidade = capacidade;
     }
 
-    public int getIdCompanhia() {
-        return idCompanhia;
+    public Companhia getCompanhia() {
+        return companhia;
     }
 
-    public void setIdCompanhia(int idCompanhia) {
-        this.idCompanhia = idCompanhia;
+    public void setCompanhia(Companhia companhia) {
+        this.companhia = companhia;
     }
 
 
@@ -77,13 +88,13 @@ public class Aviao extends Aeromodelo {
 
     @Override
     public String toString() {
-        return super.toString() + "| Placa: " + this.prefixo + " | Marca: " + this.getMarca() + " | Modelo: " + this.getModelo() + " | Capacidade: " + this.capacidade + " | IdCompanhia: " + this.idCompanhia;
+        return super.toString()+ "| Id: " + this.id + " | Placa: " + this.prefixo + " | Marca: " + this.marca + " | Modelo: " + this.modelo + " | Capacidade: " + this.capacidade + " | Companhia: " + this.companhia + " | IdCompanhia: " + this.idCompanhia;
     }
 
 
     public static Aviao getAviaoById(int id) {
         for (Aviao aviao : Aviao.avioes) {
-            if (aviao.getId() == id) {
+            if (aviao.id == id) {
                 return aviao;
             }
         }
@@ -94,8 +105,8 @@ public class Aviao extends Aeromodelo {
 
     public static Aviao deleteAviaoById(int id) {
         for (Aviao aviao : Aviao.avioes) {
-            if (aviao.getId() == id) {
-                aviao.avioes.remove(aviao);
+            if (aviao.id == id) {
+                Aviao.avioes.remove(aviao);
                 return aviao;
             }
         }

@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public abstract class Aeromodelo {
     
-    private int id;
-    private String marca;
-    private String modelo;
+    protected int id;
+    protected String marca;
+    protected String modelo;
     public static ArrayList<Aeromodelo> aeronaves = new ArrayList<Aeromodelo>();
 
     public Aeromodelo() {
