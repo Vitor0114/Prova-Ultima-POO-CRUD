@@ -6,8 +6,16 @@ public class Pista {
     private String numero;
     public static ArrayList<Pista> pistas = new ArrayList<Pista>();
 
+    public Pista(){
+        
+    }
+
     public Pista(int id, String numero) {
         this.id = id;
+        this.numero = numero;
+    }
+
+    public Pista(String numero) {
         this.numero = numero;
     }
 

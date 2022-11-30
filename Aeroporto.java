@@ -279,6 +279,9 @@ public class Aeroporto {
     }
 
     private static void CadastrarHelicoptero() {
+
+        
+
     }
 
     private static void CadastrarAviao() {

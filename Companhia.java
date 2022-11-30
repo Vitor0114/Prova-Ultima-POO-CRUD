@@ -6,9 +6,11 @@ public class Companhia {
     public String cnpj;
     public static ArrayList<Companhia> companhias = new ArrayList<Companhia>();
 
+    /* 
     public Companhia() {
 
     }
+    */
 
     public Companhia(int id, String nome, String cnpj) {
         this.id = id;
@@ -16,10 +18,11 @@ public class Companhia {
         this.cnpj = cnpj;
     }
 
+    /* 
     public Companhia(String nome, String cnpj) {
 
     }
-
+    */
 
     public int getId() {
         return id;

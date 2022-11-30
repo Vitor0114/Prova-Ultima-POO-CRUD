@@ -6,10 +6,10 @@ public class Jato extends Aeromodelo {
     private int velocidade;
     public static ArrayList<Jato> jatos = new ArrayList<Jato>();
 
+    /* 
     public Jato() {
-
-
     }
+    */
 
     public Jato(int id, String marca, String modelo, String cor, int velocidade) {
 
@@ -32,14 +32,13 @@ public class Jato extends Aeromodelo {
         }
     }
 
-
-
+    /* 
     public Jato(String marca, String modelo, String cor, int velocidade) {
         
         this.cor = cor;
         this.velocidade = velocidade;
     }
-
+    */
 
 
     public String getCor() {

@@ -21,6 +21,10 @@ public class Voo {
     private Jato jato;
     public static ArrayList<Voo> voos = new ArrayList<Voo>();
 
+    public Voo(){
+
+    }
+
     public Voo(int id, String numero, String data, String hora, String origem, String destino, String piloto, String copiloto, String observacao, int idPista, Pista pista, int idAviao, Aviao aviao, int idHelicopitero, Helicoptero helicoptero, int idJato, Jato jato) {
         try{
             if(voos.isEmpty()) {   
@@ -50,8 +54,6 @@ public class Voo {
         }
 
     }
-
-    
 
 
     public String getNumero() {
@@ -221,10 +223,7 @@ public class Voo {
         this.helicoptero = helicoptero;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "| Id: " + this.id + " | Numero: " + this.numero + " | Data: " + this.data + " | Hora: " + this.hora + " | Origem: " + this.origem + " | Destino: " + this.destino + " | Piloto: " + this.piloto + " | Observacao: " + this.observacao + " | idPista: " + this.idPista + " | Pista: " + this.pista + " | IdAviao: " + this.idAviao + " | Aviao: " + this.aviao + " | IdHelicoptero: " + this.idHelicopitero + " | Helicoptero: " + this.helicoptero + " | IdJato: " + this.idJato + " | Jato: " + this.jato;
-    }
+    
 
     public static Voo getVooById(int id) {
         for (Voo voo : Voo.voos) {
@@ -248,5 +247,10 @@ public class Voo {
         return null;
     }
 
+
+    @Override
+    public String toString() {
+        return super.toString() + "| Id: " + this.id + " | Numero: " + this.numero + " | Data: " + this.data + " | Hora: " + this.hora + " | Origem: " + this.origem + " | Destino: " + this.destino + " | Piloto: " + this.piloto + " | Observacao: " + this.observacao + " | idPista: " + this.idPista + " | Pista: " + this.pista + " | IdAviao: " + this.idAviao + " | Aviao: " + this.aviao + " | IdHelicoptero: " + this.idHelicopitero + " | Helicoptero: " + this.helicoptero + " | IdJato: " + this.idJato + " | Jato: " + this.jato;
+    }
 
 }

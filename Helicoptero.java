@@ -5,11 +5,7 @@ public class Helicoptero extends Aeromodelo{
     private String cor;
     private int capacidade;
     public static ArrayList<Helicoptero> helicopteros = new ArrayList<Helicoptero>();
-
-
-    public Helicoptero() {
-
-    }
+    
 
     public Helicoptero(String cor, int capacidade, int id, String marca, String modelo) {
         
@@ -30,10 +26,10 @@ public class Helicoptero extends Aeromodelo{
 
     }
 
-    /* 
+    /*
     public Helicoptero(String marca, String modelo, String cor, int capacidade) {
         
-        super(marca, modelo);
+        super(marca, modelo));
         try{
             if(helicopteros.isEmpty()) {   
                 
