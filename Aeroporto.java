@@ -54,31 +54,35 @@ public class Aeroporto {
 
             switch (menu) {
                 case 1:
-                    CadastrarHangar();
+                    CadastrarHangar(scanner);
                     break;
 
                 case 2:
-                    CadastrarCompanhia();
+                    CadastrarCompanhia(scanner);
                     break;
         
                 case 3:
-                    CadastrarPista();
+                    CadastrarPista(scanner);
                     break;
                     
                 case 4:
-                    CadastrarVoo();
+                    CadastrarVoo(scanner);
                     break;    
 
                 case 5:
-                    CadastrarJato();
+                    CadastrarJato(scanner);
                     break;
 
                 case 6:
-                    CadastrarAviao();
+                    if (Companhia.companhias.size() > 0) {
+                        CadastrarAviao(scanner);
+                    } else {
+                    System.out.println("Cadastre uma companhia antes de cadastrar um aviao");
+                    }
                     break;
 
                 case 7:
-                    CadastrarHelicoptero();
+                    CadastrarHelicoptero(scanner);
                     break;
 
                 case 8:
@@ -278,28 +282,92 @@ public class Aeroporto {
     private static void ListarHangar() {
     }
 
-    private static void CadastrarHelicoptero() {
-
-        
+    private static void CadastrarHelicoptero(Scanner scanner) {
 
     }
 
-    private static void CadastrarAviao() {
+    private static void CadastrarAviao(Scanner scanner) {
+
+        Boolean prefixoVerificada = false;
+        System.out.println("------Cadastro de Aviao------");
+
+        System.out.print("\nInforme a marca do Aviao: ");
+        String marca = scanner.next();
+
+        System.out.print("\nInforme o Modelo do Aviao: ");
+        String modelo = scanner.next();
+
+        System.out.print("\nInforme a capacidade do Aviao: ");
+        String capacidade = scanner.next();
+
+        System.out.print("\nInforme as letras da prefixo do aviao: ");
+        String letra = scanner.next();
+
+        System.out.print("\nInforme os números prefixo do aviao: ");
+        String numero = scanner.next();
+
+        System.out.print("\nInforme a companhia do aviao: ");
+        int companhia = scanner.nextInt();
+
+        while (prefixoVerificada != true) {
+            if (letra.length() == 3 && numero.length() == 4) {
+                prefixoVerificada = true;
+            } else if (letra.length() != 3 && numero.length() == 4) {
+                System.out.println("Digite as letras da prefixo novamente: ");
+                letra = scanner.next();
+            } else if (letra.length() == 3 && numero.length() != 4) {
+                System.out.println("Digite os números da prefixo novamente ");
+                numero = scanner.next();
+            } else {
+                System.out.println("Digite as letras da prefixo novamente");
+                letra = scanner.next();
+            }
+        }
+
+        if (prefixoVerificada == true) {
+            Generic<String, Integer> prefixo = new Generic<String, Integer>(letra, Integer.parseInt(numero));
+            try {
+                Aviao aviao = new Aviao(Aviao.aviaos.size() + 1, prefixo, marca, modelo, companhia, capacidade);
+                while (aviao.getPrefixo() == null) {
+                    int idAviao = aviao.getId();
+                    System.out.println("Já cadastrada");
+                    System.out.println("Digite as letras da prefixo novamente");
+                    letra = scanner.next();
+                    System.out.println("Digite os numeros da prefixo novamente");
+                    numero = scanner.next();
+                    prefixo = new Prefixo<String, Integer>(letra, Integer.parseInt(numero));
+                    for (Aeronave aeronave : Aeronave.aeronaves) {
+                        if (aeronave instanceof Aviao && aeronave.getId() == idAviao) {
+                            Aeronave.aeoronaves.remove(aviao);
+                            break;
+                        }
+                    }
+                    aviao = new Aviao(Aviao.aviaos.size() + 1, prefixo, marca, modelo, companhia, capacidade);
+                }
+                System.out.println("Aviao cadastrado com sucesso!\n" + aviao);
+            } catch (Exception e) {
+                System.out.println("Erro ao cadastrar aviao: " + e.getMessage());
+            }
+
+        }
+
+
+
     }
 
-    private static void CadastrarJato() {
+    private static void CadastrarJato(Scanner scanner) {
     }
 
-    private static void CadastrarVoo() {
+    private static void CadastrarVoo(Scanner scanner) {
     }
 
-    private static void CadastrarPista() {
+    private static void CadastrarPista(Scanner scanner) {
     }
 
-    private static void CadastrarCompanhia() {
+    private static void CadastrarCompanhia(Scanner scanner) {
     }
 
-    private static void CadastrarHangar() {
+    private static void CadastrarHangar(Scanner scanner) {
 
     }
 }

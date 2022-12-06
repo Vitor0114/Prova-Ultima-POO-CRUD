@@ -5,13 +5,15 @@ public abstract class Aeromodelo {
     protected int id;
     protected String marca;
     protected String modelo;
+    public static Aeromodelo[] aeromodelos;
     public static ArrayList<Aeromodelo> aeronaves = new ArrayList<Aeromodelo>();
 
-    /* 
+
+    
     public Aeromodelo() {
 
     }
-    */
+    
 
     public Aeromodelo(int id, String marca, String modelo) {
         
@@ -21,11 +23,11 @@ public abstract class Aeromodelo {
         aeronaves.add(this);
     }
 
-    /* 
+    
     public Aeromodelo(String marca, String modelo) {
 
     }
-    */
+    
 
     public int getId() {
         return id;
