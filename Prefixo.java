@@ -1,9 +1,9 @@
-public class Generic<S, N extends Number>{
+public class Prefixo<S, N extends Number>{
 
     private S txt;
     private N num;
 
-    public Generic(S txt, N num) {
+    public Prefixo(S txt, N num) {
 
         this.txt  = txt;
         this.num = num;
@@ -18,8 +18,8 @@ public class Generic<S, N extends Number>{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass()!= o.getClass()) return false;
-        Generic<S, N> Generic = (Generic<S, N>) o;
-        if(this.num.equals(Generic.num) && this.txt.equals(Generic.txt)){
+        Prefixo<S, N> prefixo = (Prefixo<S, N>) o;
+        if(this.num.equals(prefixo.num) && this.txt.equals(prefixo.txt)){
             return true;
         }
         return false;

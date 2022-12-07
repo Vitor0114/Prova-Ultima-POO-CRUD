@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class Voo {
 
@@ -247,6 +249,30 @@ public class Voo {
         return null;
     }
 
+    public static void updateVoo(int id, String numero, String data, String hora, String origem, String destino, String piloto, String copiloto, String observacao, int idPista, Pista pista, int idAviao, Aviao aviao, int idHelicopitero, Helicoptero helicoptero, int idJato, Jato jato) throws Exception{
+        Connection con = DAO.getConnect();
+        Statement stm = con.createStatement();
+        stm.execute("UPDATE Voo SET "
+        + " origem = '" + origem + "'"
+        + ", destino= '" + destino + "'"
+        + ", piloto= '" + piloto + "'"
+        + ", copiloto= '" + copiloto + "'"
+        + ", observacao= '" + observacao + "'"
+        + ", idPista= '" + idPista + "'"
+        + ", pista= '" + pista + "'"
+        + ", idAviao= '" + idAviao + "'"
+        + ", aviao= '" + aviao + "'"
+        + ", idHelicoptero= '" + idHelicopitero + "'"
+        + ", helicoptero= '" + helicoptero + "'"
+        + ", idJato= '" + idJato + "'"
+        + ", jato= '" + jato + "'"
+        + ", hora= '" + hora + "'"
+        + ", data = '" + data + "'"
+        + ", numero = '" + numero + "'"
+        + " WHERE id = " + id);
+        stm.close();
+        con.close();
+    }
 
     @Override
     public String toString() {

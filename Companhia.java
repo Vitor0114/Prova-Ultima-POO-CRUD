@@ -1,4 +1,9 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Companhia {
     public int id;
@@ -21,8 +26,14 @@ public class Companhia {
     
     public Companhia(String nome, String cnpj) {
 
+        this.nome = nome;
+        this.cnpj = cnpj;
     }
     
+
+    public Companhia(ResultSet rs) {
+    }
+
 
     public int getId() {
         return id;
@@ -86,6 +97,19 @@ public class Companhia {
     }
 
 
+    public static void updateCompanhia(int id, String nome, String cnpj) throws Exception{
+        Connection con = DAO.getConnect();
+        Statement stm = con.createStatement();
+        stm.execute("UPDATE Companhia SET "
+        + ", cnpj= '" + cnpj + "'"
+        + ", nome = '" + nome + "'"
+        + " WHERE id = " + id);
+        stm.close();
+        con.close();
+
+    }
+
+
     public static Companhia getAviaoInsert(Scanner scanner) {
 
         System.out.println("Informe o nome da Companhia");
@@ -106,7 +130,7 @@ public class Companhia {
             System.out.println("Inserindo dados no banco de dados");
             stm.execute("Insert into companhia "
                     + "(nome,cnpj) VALUES "
-                    + "('" + companhia.getNome() + "', '" + companhia.getCnpj().getId() + "')");
+                    + "('" + companhia.getNome() + "', '" + companhia.getCnpj() + "')");
             System.out.println("Dados inseridos com sucesso");
             System.out.println(companhia);
             DAO.deleteConnect();
@@ -152,7 +176,28 @@ public class Companhia {
     }
 
 
+    private Companhia getCompanhia() {
+        return null;
+    }
+
+
+    private String getCapacidade() {
+        return null;
+    }
+
+
+    private String getModelo() {
+        return null;
+    }
+
+
+    private String getMarca() {
+        return null;
+    }
+
+
     public static Companhia getAviao(Scanner scanner) throws Exception {
+        
         try {
             System.out.println("Informe o ID do companhia: ");
             int id = scanner.nextInt();

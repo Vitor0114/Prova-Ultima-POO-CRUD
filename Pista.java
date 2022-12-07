@@ -52,6 +52,10 @@ public class Pista {
     }
 
 
+    
+
+
+
     public static Pista deletePistaById(int id) {
         for (Pista pista : Pista.pistas) {
             if (pista.id == id) {

@@ -19,7 +19,7 @@ public class Helicoptero extends Aeromodelo{
     }
 
 
-    public Helicoptero(String cor, int capacidade, int id, String marca, String modelo) {
+    public Helicoptero(int id, String cor, int capacidade, String marca, String modelo) {
         
         super(id, marca, modelo);
         try{
@@ -136,7 +136,7 @@ public class Helicoptero extends Aeromodelo{
         System.out.println("Informe o capacidadedo Helicoptero");
         String capacidade= scanner.next();
 
-        Helicoptero helicoptero = new Helicoptero(cor, 0, 0, cor, capacidade);
+        Helicoptero helicoptero = new Helicoptero(capacidade, capacidade, cor, 0);
 
         return helicoptero;
     }
@@ -171,6 +171,23 @@ public class Helicoptero extends Aeromodelo{
             throw new Exception(e.getMessage());
         }
     }
+
+
+
+    public static void updateHelicoptero(int id, String marca, String modelo, String cor, int capacidade) throws Exception{
+        Connection con = DAO.getConnect();
+        Statement stm = con.createStatement();
+        stm.execute("UPDATE helicoptero SET "
+        + " cor = '" + cor + "'"
+        + ", capacidade= '" + capacidade + "'"
+        + ", modelo = '" + modelo + "'"
+        + ", marca = '" + marca + "'"
+        + " WHERE id = " + id);
+        stm.close();
+        con.close();
+    }
+
+
 
     public static void updateAviaoS(Helicoptero helicoptero) throws Exception {
         try {

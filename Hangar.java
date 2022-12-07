@@ -15,13 +15,17 @@ public class Hangar {
     private Aviao aviao;
     //private LocalDate data;
     //private LocalTime hora;
-    private static Generic<String, Integer> hangar;
+    private static Prefixo<String, Integer> hangar;
     public static ArrayList<Hangar> hangares = new ArrayList<Hangar>();
 
-    public  Hangar(int id, String local, int idAviao, Aviao aviao, /* LocalDate data, LocalTime hora,*/ Generic<String, Integer> hangar) {
+    public Hangar() {
+
+    }
+
+    public  Hangar(int id, String local, int idAviao, Aviao aviao, /* LocalDate data, LocalTime hora,*/ Prefixo<String, Integer> hangar) {
         
         try{
-            if(hangares.isEmpty()) {        
+            if(hangares.isEmpty()) {   
                 
                 this.id = id;
                 this.local = local;
@@ -31,18 +35,34 @@ public class Hangar {
                 //this.hora = hora;
                 
                 hangares.add(this);
+            }else{
+                    throw new Exception("Jato já cadastrado");
+            }
+        }catch(Exception e){
+             System.out.println(e.getMessage());
+            
+        
+
+        }
+
+    }
+
+    public Hangar(String local, int idAviao) {
+       
+        try{
+            if(hangares.isEmpty()) {        
+                  
+                this.local = local;
+                this.idAviao = idAviao;
+                hangares.add(this);
             }else if(!hangares.isEmpty()){
                 for(Hangar vaga : hangares){
                     if(vaga.getHangar().equals(hangar)){
                         throw new Exception("Hangar já cadastrada");
                     }else{
-                        this.id = id;
+
                         this.local = local;
                         this.idAviao = idAviao;
-                        this.aviao = aviao;
-                       // this.data = data;
-                       // this.hora = hora;
-
                         hangares.add(this);
                     }
                 }
@@ -92,12 +112,12 @@ public class Hangar {
     */
 
 
-    public static Generic<String, Integer> getHangar() {
+    public static Prefixo<String, Integer> getHangar() {
         return hangar;
     }
 
 
-    public static void setHangar(Generic<String, Integer> hangar) {
+    public static void setHangar(Prefixo<String, Integer> hangar) {
         Hangar.hangar = hangar;
     }
 
@@ -168,9 +188,7 @@ public class Hangar {
         String local= scanner.next();
         
 
-        return new Hangar(new Generic(null, null)<String,Integer>(null, null),local
-                 
-        );
+        return new Hangar(local, id);
 
     }
 
@@ -203,6 +221,21 @@ public class Hangar {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+
+    public static void updateHangar(int id, String local, int idAviao, Aviao aviao, Prefixo<String, Integer> hangar) throws Exception{
+        Connection con = DAO.getConnect();
+        Statement stm = con.createStatement();
+        stm.execute("UPDATE Hangar SET "
+        + ", hangar= '" + hangar + "'"
+        + ", idAviao= '" + idAviao + "'"
+        + ", aviao= '" + aviao + "'"
+        + ", local = '" + local + "'"
+        + " WHERE id = " + id);
+        stm.close();
+        con.close();
+
     }
 
 

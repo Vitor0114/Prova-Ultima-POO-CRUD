@@ -1,15 +1,20 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Aviao extends Aeromodelo {
 
-    private Generic<String, Integer> prefixo;
+    private Prefixo<String, Integer> prefixo;
     private String capacidade;
     private int idCompanhia;
     private Companhia companhia;
 
     public static ArrayList<Aviao> avioes = new ArrayList<Aviao>();
 
-    public Aviao (int id, String nome, Generic<String, Integer> prefixo, String marca, String modelo, String capacidade, Companhia companhia, int idCompanhia) {
+    public Aviao (int id, String nome, Prefixo<String, Integer> prefixo, String marca, String modelo, String capacidade, Companhia companhia, int idCompanhia) {
 
         super(id, marca, modelo);
         try{
@@ -41,11 +46,14 @@ public class Aviao extends Aeromodelo {
 
     }
 
-    public Generic<String, Integer> getPrefixo() {
+    public Aviao(ResultSet rs) {
+    }
+
+    public Prefixo<String, Integer> getPrefixo() {
         return prefixo;
     }
 
-    public void setPrefixo(Generic<String, Integer> prefixo) {
+    public void setPrefixo(Prefixo<String, Integer> prefixo) {
         this.prefixo = prefixo;
     }
 
@@ -76,7 +84,7 @@ public class Aviao extends Aeromodelo {
     }
 
 
-    public Boolean verificaPrefixo(Generic<String, Integer> prefixo){
+    public Boolean verificaPrefixo(Prefixo<String, Integer> prefixo){
         for(Aviao aviao: avioes){
             if( aviao.getPrefixo().equals(prefixo) == true){
                 return true;
@@ -119,6 +127,25 @@ public class Aviao extends Aeromodelo {
             throw new Exception(e.getMessage());
         }
     }
+
+
+    public static void updateAviao(int id, String nome, Prefixo<String, Integer> prefixo, String marca, String modelo, String capacidade, Companhia companhia, int idCompanhia) throws Exception{
+        Connection con = DAO.getConnect();
+        Statement stm = con.createStatement();
+        stm.execute("UPDATE Companhia SET "
+        + ", marca = '" + marca + "'"
+        + ", modelo = '" + modelo + "'"
+        + ", capacidade = '" + capacidade + "'"
+        + ", companhia = '" + companhia + "'"
+        + ", idCompanhia = '" + idCompanhia + "'"
+        + ", prefixo= '" + prefixo + "'"
+        + ", nome = '" + nome + "'"
+        + " WHERE id = " + id);
+        stm.close();
+        con.close();
+
+    }
+
 
 
     public static void deleteAviaoPS(Aviao aviao) {
@@ -200,12 +227,7 @@ public class Aviao extends Aeromodelo {
         System.out.println("Informe a capacidade do Aviao");
         String capacidade = scanner.next();
 
-        return new Aviao(
-                new Prefixo<String, Integer>(null, null),
-                marca,
-                modelo,
-                (Companhia) null,
-                capacidade);
+        return new Aviao(0, capacidade, null, marca, modelo, capacidade, null, 0);
     }
 
     
